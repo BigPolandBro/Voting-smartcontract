@@ -1,0 +1,396 @@
+﻿
+<!DOCTYPE html> 
+
+<html> 
+
+<head> 
+
+<meta charset="UTF-8"> 
+
+<script type="text/javascript"> 
+
+var abi = [
+	{
+		"inputs": [
+			{
+				"internalType": "bytes32[]",
+				"name": "candNames",
+				"type": "bytes32[]"
+			}
+		],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "message",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "returnValue",
+				"type": "string"
+			}
+		],
+		"name": "PaymentEvent",
+		"type": "event"
+	},
+	{
+		"payable": true,
+		"stateMutability": "payable",
+		"type": "fallback"
+	},
+	{
+		"constant": false,
+		"inputs": [],
+		"name": "IsAdmin",
+		"outputs": [
+			{
+				"internalType": "uint32",
+				"name": "",
+				"type": "uint32"
+			}
+		],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "s1",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "s2",
+				"type": "string"
+			}
+		],
+		"name": "addString",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "admin",
+		"outputs": [
+			{
+				"internalType": "address payable",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"internalType": "bytes32",
+				"name": "_bytes32",
+				"type": "bytes32"
+			}
+		],
+		"name": "bytes32ToString",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "candidates",
+		"outputs": [
+			{
+				"internalType": "bytes32",
+				"name": "name",
+				"type": "bytes32"
+			},
+			{
+				"internalType": "uint256",
+				"name": "voteCount",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "candidate",
+				"type": "uint256"
+			}
+		],
+		"name": "doPayment",
+		"outputs": [],
+		"payable": true,
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "getString2",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [],
+		"name": "getVotingList",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "voter",
+				"type": "address"
+			}
+		],
+		"name": "giveRightToVote",
+		"outputs": [],
+		"payable": true,
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [],
+		"name": "kill",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "voters",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "weight",
+				"type": "uint256"
+			},
+			{
+				"internalType": "bool",
+				"name": "voted",
+				"type": "bool"
+			},
+			{
+				"internalType": "uint256",
+				"name": "vote",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [],
+		"name": "winnerName",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "winningCandidate",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "winningCandidate_",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	}
+];
+ 
+var address = "0x641571eAe82a17086eA9A832953CD2D2A3294060";  
+
+window.addEventListener('load', async() => { 
+
+   // Modern dapp browsers 
+
+   if (window.ethereum) { 
+
+      window.web3 = new Web3(window.ethereum);                 
+    } 
+
+   // Old dapp browsers
+
+    else if (window.web3) { 
+
+      window.web3 = new Web3(web3.currentProvider);                 
+
+    } 
+
+   // Non-dapp browsers 
+
+    else { 
+
+      console.log('Your browser do not support Ethereum! Install MetaMask plugin!'); 
+
+            } 
+
+}); 
+
+function giveRightToVote() {
+
+web3.eth.getAccounts(function(error, acc)  
+
+{ 
+
+defaultAccount=acc[0]; 
+
+console.log("defaultAccount="+defaultAccount); 
+
+contract = web3.eth.contract(abi).at(address); 
+
+console.log(contract);
+     
+voter_address = document.getElementById('voter_address').value
+	 
+sum = web3.toWei(0.03, 'ether'); 
+
+contract.giveRightToVote.sendTransaction(voter_address,
+
+{
+ 
+from: defaultAccount, 				 
+
+value: sum
+
+},  
+
+function(error, data) { 
+
+ if(error!=null) console.log(error); 
+
+                       console.log("Data="+data); 
+
+                }); 
+
+});
+}
+
+
+function getVotingList() {
+
+contract = web3.eth.contract(abi).at(address); 
+contract.getVotingList.call({from:address}, function(err,data){
+ console.log(data);
+ document.getElementById("voting_list").innerHTML = data;
+
+});
+}
+
+
+function getWinner() {
+ 
+  contract = web3.eth.contract(abi).at(address); 
+  contract.winnerName.call({from:address}, function(err,data) {
+  console.log(data);
+  document.getElementById("winner").innerHTML = data;
+  });      
+}
+</script>
+
+</head> 
+
+<body background="voter.jpeg">  
+
+    <center><h1><font color="#4B0082"><b><hr>Admin page<hr></b></font></h1></center>
+	<div>
+       <p><b>Input address of voter:</b></p> 
+       <input type="text" size="128" id="voter_address" /> 
+	   <button type="button" onClick="giveRightToVote();"><b>Give right to vote</b></button>
+    </div>
+	<br>
+	<div>
+	   <button type="button" onClick="getVotingList();"><b>Show list of votes</b></button>
+    </div>
+	<p><textarea name="comment" rows="5" cols="60" id="voting_list"></textarea></p>
+	<button type="button" onClick="getWinner();"><b>Count all votes</b></button>
+	<p id="winner"></p>
+	<br><br><br><br>
+	<form action="http://localhost/main.html">
+    <center><button><b>To the main page</b></button></center>
+</body>  
+</html> 
+
